@@ -1,0 +1,25 @@
+<nav>
+    <a href="/">Página Principal</a> |
+    <a href="/produtos">Produtos</a> |
+    <a href="/contato">Entre em contato</a> |
+    <a href="/sobre">Sobre nós</a>
+    {% if not user.is_anonymous %}
+    <h3>Links Administrativos:</h3>
+    <ul>
+        <li><a href="/admin/auth/user/">Usuários</a></li>
+        <li><a href="/admin/produtos/produto/">Produtos</a></li>
+        <li><a href="/admin/produtos/categoria/">Categoria</a></li>
+        <li><a href="/admin/pedidos/pedido/">Pedidos</a></li>
+    </ul>
+    {% endif %}
+    <h4>{% with quantidade_itens=carrinho|length %}
+        {% if quantidade_itens > 0 %}
+        Seu carrinho de compras:
+        <a href="{% url 'carrinho:detalhes_carrinho' %}">{{ quantidade_itens }}
+            produto{{ quantidade_itens|pluralize }} - R${{ carrinho.get_total_geral }}</a>
+        {% else %}
+        Seu carrinho está vazio.
+        {% endif %}
+        {% endwith %}
+    </h4>
+</nav>

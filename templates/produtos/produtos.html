@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block conteudo %}
+
+<h2>Categorias</h2>
+<a href="/produtos">Todas as categorias</a>
+{% for categoria in lista_categorias %}
+<a href="{{ categoria.get_absolute_url }}">{{ categoria.nome }}</a>
+{% endfor %}
+
+<h2>Produtos</h2>
+<div class="produtoscontainer">
+    {% for produto in lista_produtos %}
+    <div class="card produtocard">
+        <a href="{{ produto.get_absolute_url }}">
+            <img class="card-img-top" src="{{ produto.imagem.url }}" alt="Card image cap">
+        </a>
+        <div class="card-body">
+            <b><p class="card-title">{{ produto.nome }}</p></b>
+            <p style="color: black;"> R${{ produto.preco }}</p>
+            <a href="{{ produto.get_absolute_url }}" class="btn btn-outline-success">COMPRAR</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<style>
+
+.produtoscontainer {
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #f5f5dc;
+}
+
+.produtoimg {
+    width: 150px;
+}
+
+.produtocard {
+    margin: 5px;
+    width: 20rem;
+    padding: 10px;
+}
+
+.card-title{
+    font-size: 1.2rem;
+    color: black;
+}
+
+.produtocard:hover{
+    opacity: 70%;
+
+}
+
+</style>
+{% endblock conteudo %}
